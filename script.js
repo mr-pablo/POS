@@ -8,29 +8,44 @@ let customer_count = 0
 
 function products() {
     document.getElementById("product_div").style.display = "flex"
+    document.getElementsByClassName("wrap_div")[0].style.display = "none"
+    document.getElementsByClassName("wrap_div")[1].style.display = "none"
 }
 function product_close() {
     document.getElementById("product_div").style.display = "none"
+    document.getElementsByClassName("wrap_div")[0].style.display = "flex"
+    document.getElementsByClassName("wrap_div")[1].style.display = "flex"
 
 }
 
 function customers() {
     document.getElementById("customer_div").style.display = "flex"
+    document.getElementsByClassName("wrap_div")[0].style.display = "none"
+    document.getElementsByClassName("wrap_div")[1].style.display = "none"
 }
 
 function customer_close() {
     document.getElementById("customer_div").style.display = "none"
+    document.getElementsByClassName("wrap_div")[0].style.display = "flex"
+    document.getElementsByClassName("wrap_div")[1].style.display = "flex"
 
 }
 
 
 
 function invoice() {
+    invoice_data_pass()
     document.getElementById("invoice_div").style.display = "flex"
+    document.getElementsByClassName("wrap_div")[0].style.display = "none"
+    document.getElementsByClassName("wrap_div")[1].style.display = "none"
+
+    
 }
 
 function invoice_close() {
     document.getElementById("invoice_div").style.display = "none"
+    document.getElementsByClassName("wrap_div")[0].style.display = "flex"
+    document.getElementsByClassName("wrap_div")[1].style.display = "flex"
 
 }
 
@@ -61,6 +76,22 @@ function add_product() {
 
     document.getElementById("total_count_product").innerHTML = `${product_count + 1}`
 
+    
+
+
+    // let invoice_count = 0
+    for (let i = product_count; i < product_array.length; i++) {
+        console.log(product_array[i]);
+        let product = product_array[i].Product_name
+        let child =  document.createElement("option")
+        child.id = "select_option"
+        child.innerHTML =     ` 
+        <option >${product}</option>
+        `
+        document.getElementById("invoice_select_box").appendChild(child)
+      
+
+    }
     product_count++
 }
 
@@ -98,73 +129,13 @@ function add_customer() {
 }
 
 
+function invoice_data_pass() {
+
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    var searchInput = document.getElementById("search-input");
-    var suggestionsContainer = document.getElementById("suggestions-container");
-    var searchButton = document.getElementById("search-button");
-
-    var suggestions = ["Apple", "Banana", "Orange", "Mango", "Grapes"];
-
-    searchInput.addEventListener("input", function() {
-      var inputValue = searchInput.value.toLowerCase();
-      showSuggestions(getMatchingSuggestions(inputValue));
-    });
-
-    searchButton.addEventListener("click", function() {
-      // Handle search button click action here
-      alert("Perform search for: " + searchInput.value);
-    });
-
-    document.addEventListener("click", function(event) {
-      if (!event.target.closest(".input-group")) {
-        suggestionsContainer.style.display = "none";
-      }
-    });
-
-    function getMatchingSuggestions(inputValue) {
-      return suggestions.filter(function(suggestion) {
-        return suggestion.toLowerCase().includes(inputValue);
-      });
-    }
-
-    function showSuggestions(matchingSuggestions) {
-      if (matchingSuggestions.length > 0) {
-        suggestionsContainer.innerHTML = "";
-        matchingSuggestions.forEach(function(suggestion) {
-          var suggestionElement = document.createElement("div");
-          suggestionElement.classList.add("suggestion", "border-bottom", "p-2");
-          suggestionElement.textContent = suggestion;
-
-          suggestionElement.addEventListener("click", function() {
-            searchInput.value = suggestion;
-            suggestionsContainer.style.display = "none";
-          });
-
-          suggestionsContainer.appendChild(suggestionElement);
-        });
-
-        suggestionsContainer.style.display = "block";
-      } else {
-        suggestionsContainer.style.display = "none";
-      }
-    }
-  });
-
-
-
+function handleclick(){
+    var selectedValue = document.getElementById("invoice_select_box").value;
+    console.log("Selected value: " + selectedValue);    
+}
