@@ -194,8 +194,15 @@
                             <th scope="col">No</th>
                             <th scope="col">Product Name</th>
                             <th scope="col">Product Price</th>
-
                         </tr>
+                        <!-- <tr>
+                            <td>orange</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>apple</td>
+                            <td>150</td>
+                        </tr> -->
                     </thead>
                     <tbody id="product_table_body">
 
@@ -238,14 +245,28 @@
                         <button id="add_button_left" class="btn btn-outline-secondary" type="button"><i
                                 class="bi bi-box-fill"></i></button>
                         <select id="invoice_select_box" class="form-select"
-                            aria-label="Example select with button addon">
+                            aria-label="Example select with button addon" onchange="select_product()">
                             <option selected>Choose...</option>
 
                         </select>
                     </div>
                     <div id="reciept_card" class="card margin_card">
-                        <div class="card-body">
+                        <div id="reciept_body" class="card-body">
 
+                            <table class="table" id="reciept_table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Qty.</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reciept_table_body">
+
+                                </tbody>
+                            </table>
 
 
                         </div>
@@ -265,8 +286,9 @@
                         </select>
                     </div>
                     <div id="reciept_card" class="card  margin_card">
-                        <div class="card-body">
-
+                        <div class="card-body reciept_card">
+                            <div id="reciept_customer_name"></div>
+                            <div id="reciept_total_amount"></div>
 
 
                         </div>
@@ -275,7 +297,7 @@
 
 
 
-
+                <input type="number" value="">
 
 
 
@@ -293,3 +315,5 @@
 </body>
 
 </html>
+
+<!-- <input type="text" oninput=""> -->

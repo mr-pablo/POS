@@ -2,8 +2,11 @@ let form_product = document.getElementById("product_form")
 let form_customer = document.getElementById("customer_form")
 let product_array = []
 let customer_array = []
+let order_array = []
+let table_row_array = []
 let product_count = 0
 let customer_count = 0
+let invoice_count = 0
 
 
 function products() {
@@ -39,7 +42,7 @@ function invoice() {
     document.getElementsByClassName("wrap_div")[0].style.display = "none"
     document.getElementsByClassName("wrap_div")[1].style.display = "none"
 
-    
+
 }
 
 function invoice_close() {
@@ -56,7 +59,8 @@ function add_product() {
     form_product.reset();
     let products = {
         Product_name: `${product_name}`,
-        Product_price: `${product_price}`
+        Product_price: `${product_price}`,
+        id: `${product_count}`
     }
 
     product_array.push(products)
@@ -76,20 +80,18 @@ function add_product() {
 
     document.getElementById("total_count_product").innerHTML = `${product_count + 1}`
 
-    
 
 
     // let invoice_count = 0
     for (let i = product_count; i < product_array.length; i++) {
         console.log(product_array[i]);
         let product = product_array[i].Product_name
-        let child =  document.createElement("option")
+        let child = document.createElement("option")
         child.id = "select_option"
-        child.innerHTML =     ` 
+        child.innerHTML = ` 
         <option >${product}</option>
         `
         document.getElementById("invoice_select_box").appendChild(child)
-      
 
     }
     product_count++
@@ -135,7 +137,61 @@ function invoice_data_pass() {
 
 
 
-function handleclick(){
-    var selectedValue = document.getElementById("invoice_select_box").value;
-    console.log("Selected value: " + selectedValue);    
+function select_product() {
+    var selectedproduct = document.getElementById("invoice_select_box").value;
+    // console.log("Selected value: " + selectedproduct);    
+    var product_index = product_array.findIndex(product => product.Product_name === selectedproduct);
+
+    console.log(product_index);
+    let push_element = product_array[product_index]
+    order_array.push(push_element)
+    Order_array(product_index)
+
 }
+
+function Order_array(index) {
+
+    console.log(order_array);
+    let product_name = order_array[index].Product_name
+    let product_price = order_array[index].Product_price
+
+
+
+    let row = document.createElement("tr")
+    row.innerHTML = ` 
+    <th scope="row">${index + 1}</th>
+    <td>${product_name}</td>
+    <td><input id="price_input" type="number" value="${product_price}" oninput="price_change(this)"></td>
+    <td><input id="quantity_input" type="number" value="1"  oninput="quantity_change(this)"></td>
+    <td id="total">${product_price}</td> 
+    `
+
+
+
+    document.getElementById("reciept_table_body").appendChild(row)
+    invoice_count++
+}
+
+let get_quantity = 0
+let get_price = 0
+function quantity_change(element) {
+    let quantity = element.value
+    let row = element.parentNode.parentNode;
+    let price_element = row.querySelector('#price_input');
+    let price = price_element.value
+    let total_amount = quantity * price
+    let total_elemet = row.querySelector('#total');
+    total_elemet.innerHTML = `${total_amount}`
+}
+
+function price_change(element_price) {
+    let price = element_price.value
+    let row = element_price.parentNode.parentNode;
+    let quantity_element = row.querySelector('#quantity_input');
+    let quantity = quantity_element.value
+    let total_amount = quantity * price
+    let total_elemet = row.querySelector('#total');
+    total_elemet.innerHTML = `${total_amount}`
+}
+
+

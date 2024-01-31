@@ -73,6 +73,7 @@ body {
     row-gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
+    overflow: auto;
     /* flex-direction: column; */
 
 }
@@ -223,7 +224,7 @@ body {
     flex-wrap:wrap ;
     /* align-items: center; */
     /* flex-direction: column; */
-    overflow: auto;
+    overflow-x: auto;
     scroll-behavior: smooth;
 }
 
@@ -331,10 +332,18 @@ height: 100%;
 }
 
 #reciept_card{
-    width: 80% !important;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    overflow: scroll;
+    min-width: 80% !important;
+    width: auto;
     min-height: 30% !important;
     height: auto !important;
 }
+/* #reciept_body{
+    width: fit-content !important;
+} */
 
 @media only screen and (max-width: 700px) {
  
@@ -343,6 +352,8 @@ height: 100%;
         width: 100%;
         min-height: 60%;
         height: auto;
+        /* overflow: scroll; */
+        /* background-color: #6fd64b; */
     }
 
     #invoice_right {
@@ -354,6 +365,7 @@ height: 100%;
     #reciept_card{
         width: 100% !important;
         height: 50% !important;
+        overflow: auto;
     }  
 
     #invoice_customer_box{
@@ -366,4 +378,35 @@ height: 100%;
 
 .margin_card{
     margin-top: 0 !important;
+}
+
+#reciept_table{
+    width: 100%;
+}
+
+#price_input{
+    width: 50px;
+    border: 0   ;
+}
+
+#quantity_input{
+    width: 50px;
+    border: 0   ;
+    cursor: text;
+}
+.reciept_card{
+    flex-direction: column;
+}
+
+#reciept_customer_name{
+    width: 100%;
+    height: 30%;
+    background-color: #6fd64b;
+    border-bottom: dashed black 1px;
+    
+}
+#reciept_total_amount{
+    width: 100%;
+    height: 70%;
+    background-color: #f7941d;
 }
