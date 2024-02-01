@@ -301,6 +301,10 @@ height: 100%;
     margin-top: 30px;
     height: 40px;
 }
+#invoice_select_box_customer{
+    margin-top: 30px;
+    height: 40px;
+}
 #invoice_customer_box{
     margin-top: 30px;
     height: 40px;
@@ -409,4 +413,10 @@ height: 100%;
     width: 100%;
     height: 70%;
     background-color: #f7941d;
+    color: black;
+    font-size: 30px;
+}
+
+#delete_button{
+    color: red;
 }

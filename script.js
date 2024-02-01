@@ -127,6 +127,19 @@ function add_customer() {
 
     document.getElementById("total_count_customer").innerHTML = `${customer_count + 1}`
 
+
+    for (let i = customer_count; i < customer_array.length; i++) {
+        console.log(customer_array[i]);
+        let customer = customer_array[i].customer_name
+        let child = document.createElement("option")
+        child.id = "select_option"
+        child.innerHTML = ` 
+        <option >${customer}</option>
+        `
+        document.getElementById("invoice_select_box_customer").appendChild(child)
+
+    }
+
     customer_count++
 }
 
@@ -136,45 +149,49 @@ function invoice_data_pass() {
 }
 
 
-
+ 
 function select_product() {
     var selectedproduct = document.getElementById("invoice_select_box").value;
     // console.log("Selected value: " + selectedproduct);    
     var product_index = product_array.findIndex(product => product.Product_name === selectedproduct);
 
-    console.log(product_index);
+    console.log("product--index =",product_index);
     let push_element = product_array[product_index]
     order_array.push(push_element)
     Order_array(product_index)
 
 }
-
+let num = 0
 function Order_array(index) {
 
     console.log(order_array);
-    let product_name = order_array[index].Product_name
-    let product_price = order_array[index].Product_price
+    let product_name = order_array[num].Product_name
+    let product_price = order_array[num].Product_price
 
 
 
     let row = document.createElement("tr")
     row.innerHTML = ` 
-    <th scope="row">${index + 1}</th>
+    <td ><i id="delete_button" onclick="delete_row(this)" class="bi bi-x-circle-fill"></i></td> 
+    <th scope="row" class="nums">${num + 1}</th>
     <td>${product_name}</td>
     <td><input id="price_input" type="number" value="${product_price}" oninput="price_change(this)"></td>
     <td><input id="quantity_input" type="number" value="1"  oninput="quantity_change(this)"></td>
-    <td id="total">${product_price}</td> 
+    <td id="total" class="totals">${product_price}</td> 
     `
 
 
 
     document.getElementById("reciept_table_body").appendChild(row)
-    invoice_count++
+    total_amount_calc() 
+    arrange_num()
+    
+    num++
 }
 
 let get_quantity = 0
 let get_price = 0
-function quantity_change(element) {
+function quantity_change(element) { 
     let quantity = element.value
     let row = element.parentNode.parentNode;
     let price_element = row.querySelector('#price_input');
@@ -182,6 +199,8 @@ function quantity_change(element) {
     let total_amount = quantity * price
     let total_elemet = row.querySelector('#total');
     total_elemet.innerHTML = `${total_amount}`
+
+    total_amount_calc()
 }
 
 function price_change(element_price) {
@@ -192,6 +211,37 @@ function price_change(element_price) {
     let total_amount = quantity * price
     let total_elemet = row.querySelector('#total');
     total_elemet.innerHTML = `${total_amount}`
+
+
+    total_amount_calc()
+
+}
+
+function delete_row(element) {
+    let row = element.parentNode.parentNode
+    row.parentNode.removeChild(row);
+    total_amount_calc()
+    arrange_num()
+}
+
+function total_amount_calc() {
+    let totals = document.getElementsByClassName("totals")
+    let add = 0
+    for (let i = 0; i < totals.length; i++) {
+        let value = totals[i].innerHTML
+        value = parseInt(value)
+        add = add + value
+        document.getElementById("reciept_total_amount").innerHTML = `${add}`
+        console.log("total-price = ",add);
+
+    }
+}
+
+function arrange_num(){
+    let num_elements = document.getElementsByClassName("nums")
+    for(let i=0 ;i<num_elements.length;i++){
+        num_elements[i].innerHTML = i + 1
+    }
 }
 
 
