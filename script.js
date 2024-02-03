@@ -1,3 +1,5 @@
+// import * as html2pdf from 'html2pdf.js';
+
 let form_product = document.getElementById("product_form")
 let form_customer = document.getElementById("customer_form")
 let product_array = []
@@ -41,8 +43,6 @@ function invoice() {
     document.getElementById("invoice_div").style.display = "flex"
     document.getElementsByClassName("wrap_div")[0].style.display = "none"
     document.getElementsByClassName("wrap_div")[1].style.display = "none"
-
-
 }
 
 function invoice_close() {
@@ -52,10 +52,15 @@ function invoice_close() {
 
 }
 
+// function add_product() {
 
-function add_product() {
+let myForm = document.getElementById("product_form")
+
+myForm.addEventListener("submit", function (event) {
+    event.preventDefault();
     let product_name = document.getElementById("product_name").value
     let product_price = document.getElementById("product_price").value
+
     form_product.reset();
     let products = {
         Product_name: `${product_name}`,
@@ -72,9 +77,9 @@ function add_product() {
 
     let row = document.createElement("tr")
     row.innerHTML = ` 
-    <th scope="row">${product_count + 1}</th>
-    <td>${array_product_name}</td>
-    <td>${array_product_price}</td>`
+        <th scope="row">${product_count + 1}</th>
+        <td>${array_product_name}</td>
+        <td>${array_product_price}</td>`
 
     document.getElementById("product_table_body").appendChild(row)
 
@@ -97,12 +102,18 @@ function add_product() {
 
     }
     product_count++
-}
+});
+
+// }
 
 
 
 
-function add_customer() {
+let costomerForm = document.getElementById("customer_form")
+
+
+costomerForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
     let customer_name = document.getElementById("customer_name").value
     // let product_price = document.getElementById("product_price").value
@@ -143,7 +154,9 @@ function add_customer() {
     }
 
     customer_count++
-}
+
+});
+
 
 
 function invoice_data_pass() {
@@ -201,11 +214,12 @@ function Order_array(selectedproduct) {
 
 
     let row = document.createElement("tr")
+    row.className = "table_rows"
     row.innerHTML = ` 
-    <td ><i id="delete_button" onclick="delete_row(this)" class="bi bi-x-circle-fill"></i></td> 
+    <td ><i id="delete_button" onclick="delete_row(this)" class="bi bi-trash-fill"></i></td> 
     <th scope="row" class="nums">${num + 1}</th>
     <td id = "product_name">${product_name}</td>
-    <td><input id="price_input" type="number" value="${product_price}" oninput="price_change(this)"></td>
+    <td><input id="price_input" class="prices" type="number" value="${product_price}" onchange="price_change(this)"></td>
     <td><input id="quantity_input" class="quantity" type="number" value="1"  onchange="quantity_change(this)"></td>
     <td id="total" class="totals">${product_price}</td> 
     `
@@ -225,7 +239,7 @@ let get_price = 0
 function quantity_change(element) {
     let quantity = element.value
 
-    
+
     if (quantity <= 0) {
         element.value = 1
         total_elemet.innerHTML = `${price}`
@@ -243,12 +257,15 @@ function quantity_change(element) {
 function price_change(element_price) {
 
     let price = element_price.value
-    if (price < 0) {
-        element_price.value = 0
-        total_elemet.innerHTML = "0"
-    }
     let row = element_price.parentNode.parentNode;
     let total_elemet = row.querySelector('#total');
+    if (price < 1) {
+        element_price.value = 1
+        let added_total = quantity * 1
+        total_elemet.innerHTML = `${added_total}`
+        // total_amount_calc()
+    }
+
 
     let quantity_element = row.querySelector('#quantity_input');
     let quantity = quantity_element.value
@@ -269,6 +286,9 @@ function delete_row(element) {
     var remove_index = order_array.findIndex(product => product.Product_name === pro_name);
     order_array.splice(remove_index, 1)
     row.parentNode.removeChild(row);
+    if (order_array.length === 0) {
+        document.getElementById("total_amount_show").innerHTML = ""
+    }
 
 
     total_amount_calc()
@@ -283,7 +303,7 @@ function total_amount_calc() {
         let value = totals[i].innerHTML
         value = parseInt(value)
         add = add + value
-        document.getElementById("reciept_total_amount").innerHTML = `${add}`
+        document.getElementById("total_amount_show").innerHTML = `$  ${add}`
         console.log("total-price = ", add);
 
     }
@@ -296,8 +316,86 @@ function arrange_num() {
     }
 }
 
-function select_customer() {
-    let customer = document.getElementById("invoice_select_box_customer").value
-    console.log(customer);
-    document.getElementById("reciept_customer_name").innerHTML = `${customer}`
+function select_customer(element) {
+    let selected_customer = element.value
+    console.log(selected_customer);
+
+    if (selected_customer === "Select Costomer") {
+        document.getElementById("recipt_inside_body").innerHTML = "Customer Name : "
+    } else {
+        let customer = document.getElementById("invoice_select_box_customer").value
+        console.log(customer);
+        document.getElementById("recipt_inside_body").innerHTML = `Customer Name : ${customer}`
+    }
+
+}
+
+function check_number() {
+    let value = document.getElementById("product_price").value
+
+    if (value < 1) {
+        document.getElementById("product_price").value = null
+    }
+
+}
+
+function completed_purchase() {
+    if (order_array.length === 0) {
+        var toastElement = new bootstrap.Toast(document.getElementById('liveToast'));
+        toastElement.show();
+    } else {
+        var modalElement = document.getElementById('bill_modal');
+        var modal = new bootstrap.Modal(modalElement);
+        modal.show();
+        let customer = document.getElementById("invoice_select_box_customer").value
+        document.getElementById("bill_table_body").innerHTML = ""
+        if (customer === "Select Costomer") {
+            customer = "_________"
+        }
+        document.getElementById("customer_name_show").innerHTML = `Customer Name : ${customer}`
+        let all_quantitys = document.getElementsByClassName("quantity")
+        let all_prices = document.getElementsByClassName("prices")
+        let all_totals = document.getElementsByClassName("totals")
+        let amount = document.getElementById("total_amount_show").innerHTML
+
+        for (let i = 0; i < order_array.length; i++) {
+            let quantity = all_quantitys[i].value
+            let price = all_prices[i].value
+            let total = all_totals[i].innerHTML
+            let product = order_array[i].Product_name
+
+            let row = document.createElement("tr")
+            row.innerHTML = `  
+        <tr>
+        <th scope="row">${i + 1}</th>
+        <td>${product}</td>
+        <td>${price}</td>
+        <td>${quantity}</td>
+        <td>${total}</td>
+        </tr>`
+            document.getElementById("bill_table_body").appendChild(row)
+
+
+        }
+        document.getElementById("Total_Amount").innerHTML = `${amount}`
+    }
+
+
+
+    // print()
+}
+
+
+
+function saveToFile() {
+    // var pageContent = document.documentElement.outerHTML;
+    // html2pdf().from(pageContent).save();
+
+
+    // document.getElementById('save_bttn').addEventListener('click', saveToFile);
+    // print()
+
+    // window.jsPDF = window.jspdf.jsPDF;
+
+    // var doc = save()
 }

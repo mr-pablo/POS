@@ -226,6 +226,7 @@ body {
     /* flex-direction: column; */
     overflow-x: auto;
     scroll-behavior: smooth;
+  
 }
 
 .card {
@@ -255,6 +256,7 @@ body {
     display: flex;  
     flex-direction: column;
     border-left: dashed black 1px ;
+    gap: 10px;
     
 }
 
@@ -362,16 +364,47 @@ body {
     border: 0   ;
     cursor: text;
 }
+
+
 .reciept_card{
-    flex-direction: column;
+    flex-direction: column  ;
 }
 
 #reciept_customer_name{
     width: 100%;
     height: 40%;
-    background-color: #6fd64b;
+    /* background-color: #6fd64b; */
     border-bottom: dashed black 1px;
+    font-size: 30px;
+    display: flex;
+}
+#reciept_card_right{
+    height: 25% !important;
+    /* display: flex; */
+    flex-direction: column !important;
+}
+.recipt_inside_body{
+    width: 50%;
+    height: 100%;
+    /* background-color: #fb5d5d; */
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#recipt_inside_body{
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    /* background-color: #381111; */
+    /* padding: 1px; */
     
+    width: 100%;
+
 }
 /* #reciept_total_amount{
     width: 100%;
@@ -387,18 +420,71 @@ body {
 
 #reciept_div{
     display: flex;
+    height: 60%;
+    flex-direction: column;
 }
 
 #reciept_total_amount{
-    width: 50%;
-    height: 100%;
-    background-color: #f7941d;
+    width: 100%;
+    height: 30%;
+    /* background-color: #f7941d; */
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#total_amount_show{
+    width: 100%;
+    height: 40%;
+    /* background-color: #6fd64b; */
+    font-size: 25px;
+    font-weight: bold;
+    color: #6fd64b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
+#complete_purchse{
+    width: 230px;
+    background-color: #489ee7;
+    border: 0;
+    font-weight: bold;
+    border-radius: 5px;
+}
 
+#bill_body{
+    align-items: flex-start;
+}
 
+tfoot{
+    font-size: 20px;
+}
 
+#ban{
+    color: red;
+}
 
+#customer_name_show{
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+#bill_modal_head{
+    flex-direction: column;
+}
+
+/* 
+@media print {
+    #close_bttn{
+        display: none;
+    }
+    #save_bttn{
+        display: none;
+    }
+    #close_bttn{
+        display: none;
+    }
+} */
 
 
