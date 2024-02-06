@@ -1,4 +1,4 @@
-// import * as html2pdf from 'html2pdf.js';
+// import * as html2pdf from 'html2pdf.js'; 
 
 let form_product = document.getElementById("product_form")
 let form_customer = document.getElementById("customer_form")
@@ -87,24 +87,18 @@ myForm.addEventListener("submit", function (event) {
 
 
 
-    // let invoice_count = 0
-    for (let i = product_count; i < product_array.length; i++) {
-        console.log(product_array[i]);
-        let product = product_array[i].Product_name
-        let child = document.createElement("option")
-        child.id = "select_option"
-        child.innerHTML = ` 
+
+    let product = product_array[product_count].Product_name
+    let child = document.createElement("option")
+    child.id = "select_option"
+    child.innerHTML = ` 
         <option >${product}</option>
         `
-        document.getElementById("invoice_select_box").appendChild(child)
+    document.getElementById("invoice_select_box").appendChild(child)
 
-
-
-    }
     product_count++
 });
 
-// }
 
 
 
@@ -185,7 +179,7 @@ function select_product() {
         present_quantity = present_quantity + 1
 
         selected_elemet.value = present_quantity
-        total_amount_calc()
+        // total_amount_calc()
         quantity_change(selected_elemet)
         document.getElementById("invoice_select_box").selectedIndex = 0
 
@@ -243,13 +237,15 @@ function quantity_change(element) {
     if (quantity <= 0) {
         element.value = 1
         total_elemet.innerHTML = `${price}`
+    } else {
+        let row = element.parentNode.parentNode;
+        let total_elemet = row.querySelector('#total');
+        let price_element = row.querySelector('#price_input');
+        let price = price_element.value
+        let total_amount = quantity * price
+        total_elemet.innerHTML = `${total_amount}`
     }
-    let row = element.parentNode.parentNode;
-    let total_elemet = row.querySelector('#total');
-    let price_element = row.querySelector('#price_input');
-    let price = price_element.value
-    let total_amount = quantity * price
-    total_elemet.innerHTML = `${total_amount}`
+
 
     total_amount_calc()
 }
@@ -263,18 +259,19 @@ function price_change(element_price) {
         element_price.value = 1
         let added_total = quantity * 1
         total_elemet.innerHTML = `${added_total}`
-        // total_amount_calc()
+
+    } else {
+        let quantity_element = row.querySelector('#quantity_input');
+        let quantity = quantity_element.value
+        let total_amount = quantity * price
+
+        total_elemet.innerHTML = `${total_amount}`
     }
 
 
-    let quantity_element = row.querySelector('#quantity_input');
-    let quantity = quantity_element.value
-    let total_amount = quantity * price
-
-    total_elemet.innerHTML = `${total_amount}`
-
-
     total_amount_calc()
+
+
 
 }
 
@@ -398,4 +395,52 @@ function saveToFile() {
     // window.jsPDF = window.jspdf.jsPDF;
 
     // var doc = save()
+}
+
+// window.onload = function(){
+//     document.getElementById("save_bttn").addEventListener("click",() => {
+
+//     })
+// }
+function save_pdf() {
+    document.getElementById("close_bttn").style.display = "none"
+    document.getElementById("save_bttn").style.display = "none"
+    document.getElementById("close_bttn_bottom").style.display = "none"
+    const invoice = this.document.getElementById("modal_save")
+    console.log(invoice);
+    console.log(window);
+    html2pdf().from(invoice).save();
+    // reset_all()
+    document.getElementById("reciept_table_body").innerHTML = ""
+    document.getElementById("recipt_inside_body").innerHTML = "Customer Name:"
+    document.getElementById("total_amount_show").innerHTML = ""
+    let select_box = document.getElementById("invoice_select_box_customer")
+    select_box.selectedIndex = 0;
+
+    document.getElementById("bill_table_body").value = ""
+    order_array = []
+    setTimeout(
+        () => {
+            document.getElementById("close_bttn").style.display = "block"
+            document.getElementById("close_bttn_bottom").style.display = "block"
+            document.getElementById("save_bttn").style.display = "block"
+        },3000
+    )
+}
+
+
+function reset_all() {
+
+
+}
+
+
+
+function total_sale_open() {
+    document.getElementById("total_sale_div").style.display = "flex"
+}
+
+function total_sale_close() {
+    document.getElementById("total_sale_div").style.display = "none"
+
 }

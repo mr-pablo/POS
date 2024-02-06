@@ -66,7 +66,7 @@ body {
 #home_div {
     padding: 10px;
     display: flex;
-    background-color: #e9ebee;
+    background-color: white;
     height: fit-content;
     width: 100%;
     gap: 30px;
@@ -221,12 +221,12 @@ body {
     height: auto;
     background-color: #e9ebee;
     display: none;
-    flex-wrap:wrap ;
+    flex-wrap: wrap;
     /* align-items: center; */
     /* flex-direction: column; */
     overflow-x: auto;
     scroll-behavior: smooth;
-  
+
 }
 
 .card {
@@ -244,7 +244,7 @@ body {
     display: flex;
     flex-direction: column;
     height: auto !important;
-    
+
 }
 
 #invoice_right {
@@ -253,22 +253,24 @@ body {
     /* background-color: #f7941d; */
     /* justify-content: center; */
     align-items: center;
-    display: flex;  
+    display: flex;
     flex-direction: column;
-    border-left: dashed black 1px ;
+    border-left: dashed black 1px;
     gap: 10px;
-    
+
 }
 
-#invoice_select_box{
+#invoice_select_box {
     margin-top: 30px;
     height: 40px;
 }
-#invoice_select_box_customer{
+
+#invoice_select_box_customer {
     margin-top: 30px;
     height: 40px;
 }
-#invoice_customer_box{
+
+#invoice_customer_box {
     margin-top: 30px;
     height: 40px;
 }
@@ -279,7 +281,7 @@ body {
 
 
 
-#add_button{
+#add_button {
     height: 40px;
     width: 50px;
     color: white;
@@ -288,7 +290,7 @@ body {
     margin-top: 30px;
 }
 
-#add_button_left{
+#add_button_left {
     width: 50px;
     height: 40px;
     color: white;
@@ -297,11 +299,11 @@ body {
     margin-top: 30px;
 }
 
-.input-group{
+.input-group {
     width: 80% !important;
 }
 
-#reciept_card{
+#reciept_card {
     /* display: flex; */
     /* justify-content: center; */
     /* align-items: center; */
@@ -311,12 +313,13 @@ body {
     min-height: 30% !important;
     height: auto !important;
 }
+
 /* #reciept_body{
     width: fit-content !important;
 } */
 
 @media only screen and (max-width: 700px) {
- 
+
 
     #invoice_left {
         width: 100%;
@@ -332,13 +335,14 @@ body {
         width: 100%;
         min-height: 70%;
     }
-    #reciept_card{
+
+    #reciept_card {
         width: 100% !important;
         height: 50% !important;
         overflow: auto;
-    }  
+    }
 
-    #invoice_customer_box{
+    #invoice_customer_box {
         margin-top: 10px !important;
         height: 40px;
         /* width: 100% !important; */
@@ -346,31 +350,31 @@ body {
 
 }
 
-.margin_card{
+.margin_card {
     margin-top: 0 !important;
 }
 
-#reciept_table{
+#reciept_table {
     width: 100%;
 }
 
-#price_input{
+#price_input {
     width: 50px;
-    border: 0   ;
+    border: 0;
 }
 
-#quantity_input{
+#quantity_input {
     width: 50px;
-    border: 0   ;
+    border: 0;
     cursor: text;
 }
 
 
-.reciept_card{
-    flex-direction: column  ;
+.reciept_card {
+    flex-direction: column;
 }
 
-#reciept_customer_name{
+#reciept_customer_name {
     width: 100%;
     height: 40%;
     /* background-color: #6fd64b; */
@@ -378,12 +382,14 @@ body {
     font-size: 30px;
     display: flex;
 }
-#reciept_card_right{
+
+#reciept_card_right {
     height: 25% !important;
     /* display: flex; */
     flex-direction: column !important;
 }
-.recipt_inside_body{
+
+.recipt_inside_body {
     width: 50%;
     height: 100%;
     /* background-color: #fb5d5d; */
@@ -394,7 +400,7 @@ body {
     justify-content: center;
 }
 
-#recipt_inside_body{
+#recipt_inside_body {
     font-size: 13px;
     font-weight: bold;
     display: flex;
@@ -402,10 +408,11 @@ body {
     /* justify-content: center; */
     /* background-color: #381111; */
     /* padding: 1px; */
-    
+
     width: 100%;
 
 }
+
 /* #reciept_total_amount{
     width: 100%;
     height: 70%;
@@ -414,17 +421,17 @@ body {
     font-size: 30px;
 } */
 
-#delete_button{
+#delete_button {
     color: red;
 }
 
-#reciept_div{
+#reciept_div {
     display: flex;
     height: 60%;
     flex-direction: column;
 }
 
-#reciept_total_amount{
+#reciept_total_amount {
     width: 100%;
     height: 30%;
     /* background-color: #f7941d; */
@@ -432,7 +439,7 @@ body {
     font-size: 20px;
 }
 
-#total_amount_show{
+#total_amount_show {
     width: 100%;
     height: 40%;
     /* background-color: #6fd64b; */
@@ -445,7 +452,7 @@ body {
 }
 
 
-#complete_purchse{
+#complete_purchse {
     width: 230px;
     background-color: #489ee7;
     border: 0;
@@ -453,38 +460,61 @@ body {
     border-radius: 5px;
 }
 
-#bill_body{
+#bill_body {
     align-items: flex-start;
 }
 
-tfoot{
+tfoot {
     font-size: 20px;
 }
 
-#ban{
+#ban {
     color: red;
 }
 
-#customer_name_show{
+#customer_name_show {
     margin-left: 10px;
     font-weight: bold;
 }
 
-#bill_modal_head{
+#bill_modal_head {
     flex-direction: column;
 }
 
-/* 
 @media print {
-    #close_bttn{
+    #close_bttn {
         display: none;
     }
-    #save_bttn{
-        display: none;
-    }
-    #close_bttn{
-        display: none;
-    }
-} */
 
+    #save_bttn {
+        display: none;
+    }
 
+    #close_bttn {
+        display: none;
+    }
+}
+
+.nav-item {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#total_sale_div {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 64px;
+    bottom: 0;
+    background-color: #e9ebee;
+    display: none;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    /* flex-direction: column; */
+    overflow-x: auto;
+}
+
+.img-thumbnail{
+    width: 300px;
+    height: 300px !important;
+}
